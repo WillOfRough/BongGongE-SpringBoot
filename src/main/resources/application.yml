@@ -1,0 +1,51 @@
+spring:
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url:  jdbc:mysql://database-1.c0d1bhka4gti.ap-northeast-2.rds.amazonaws.com:3306/Bonggong?serverTimezone=UTC&characterEncoding=UTF-8
+    username: admin
+    password: 12345678
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      format_sql: true
+      ddl-auto: update
+
+
+  hikari:
+    connectionTimeout: 5000
+    vaildationTimeout: 1000
+    maxPoolSize: 30
+
+  messages:
+    basename: i18n/exception
+    encoding: UTF-8
+  jwt:
+    secret: 4121214
+
+  servlet:
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 200MB
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+
+server:
+  port: 8080
