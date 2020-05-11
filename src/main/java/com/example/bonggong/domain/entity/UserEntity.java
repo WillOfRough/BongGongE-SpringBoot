@@ -1,14 +1,14 @@
 package com.example.bonggong.domain.entity;
 
 import lombok.*;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
 
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Document(collection = "User")
 @Getter
-@Entity
-@Table(name = "user")
+@Setter
 public class UserEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

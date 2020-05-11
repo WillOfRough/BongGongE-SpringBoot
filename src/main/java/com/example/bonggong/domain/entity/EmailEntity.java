@@ -1,20 +1,17 @@
 package com.example.bonggong.domain.entity;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Document(collection = "Email")
 @Getter
-@Entity
-@Table(name = "email")
+@Setter
 public class EmailEntity {
 
     @Id
@@ -24,7 +21,7 @@ public class EmailEntity {
     @Column(name = "check_num")
     private int checkNum;
 
-    @ColumnDefault("false") //default 0
+    @ColumnDefault("false")
     private boolean certified;
 
     @Builder

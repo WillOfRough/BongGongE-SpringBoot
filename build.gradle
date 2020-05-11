@@ -32,7 +32,7 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
-    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.18'
+    compile group: 'org.springframework.data', name: 'spring-data-mongodb', version: '2.2.6.RELEASE'
     compile("org.springframework.boot:spring-boot-starter-security")
     compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
     compile('org.apache.tomcat.embed:tomcat-embed-jasper') // web-jsp
