@@ -1,4 +1,4 @@
-package com.example.bonggonge.service;
+package com.example.bonggonge.service.sign;
 
 
 import com.example.bonggonge.config.jwt.JwtTokenUtil;
@@ -30,13 +30,13 @@ public class LoginService implements UserDetailsService {
     private JwtTokenUtil jwtTokenUtil;
 
     @Transactional
-    public boolean joinUser(String username,String password,String email,String nickName,String gender) {
-        List<EmailEntity> emailEntityList = emailRepository.findByEmail(email);
-        if(emailEntityList.isEmpty()){
-            return false;
-        }
-        Optional<UserEntity> userEntityWrapper = userRepository.findByUsername(username);
-        if(emailEntityList.get(0).isCertified()&&!userEntityWrapper.isPresent()){
+    public boolean joinUser(String username,String password,String email,String nickName) {
+//        List<EmailEntity> emailEntityList = emailRepository.findByEmail(email);
+//        if(emailEntityList.isEmpty()){
+//            return false;
+//        }
+//        Optional<UserEntity> userEntityWrapper = userRepository.findByUsername(username);
+//        if(emailEntityList.get(0).isCertified()&&!userEntityWrapper.isPresent()){
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();     // 비밀번호 암호화
 
             UserJwtDto userDto = UserJwtDto.builder()
@@ -48,8 +48,8 @@ public class LoginService implements UserDetailsService {
 
             userRepository.save(userDto.toEntity());
             return true;
-        }
-        return false;
+//        }
+//        return false;
     }
 
     @Transactional

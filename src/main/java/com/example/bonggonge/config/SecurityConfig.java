@@ -3,7 +3,7 @@ package com.example.bonggonge.config;
 
 import com.example.bonggonge.config.jwt.JwtAuthenticationEntryPoint;
 import com.example.bonggonge.config.jwt.JwtRequestFilter;
-import com.example.bonggonge.service.LoginService;
+import com.example.bonggonge.service.sign.LoginService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
