@@ -35,6 +35,7 @@ public class LoginController {
             try{
                 result.put("result",loginService.joinUser(params.get("username"),params.get("password"),params.get("email"),params.get("nickname")));
             } catch (Exception e){
+                e.printStackTrace();
                 result.put("error",responseError.makeResponseError("server-001"));
                 result.put("result",false);
             }

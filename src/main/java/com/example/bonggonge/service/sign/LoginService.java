@@ -8,6 +8,7 @@ import com.example.bonggonge.domain.repository.EmailRepository;
 import com.example.bonggonge.domain.repository.UserRepository;
 import com.example.bonggonge.dto.UserJwtDto;
 import lombok.AllArgsConstructor;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,6 +28,7 @@ import java.util.Set;
 public class LoginService implements UserDetailsService {
     private UserRepository userRepository;
     private EmailRepository emailRepository;
+    private final MongoTemplate mongoTemplate;
     private JwtTokenUtil jwtTokenUtil;
 
     @Transactional
@@ -46,7 +48,7 @@ public class LoginService implements UserDetailsService {
                     .email(email)
                     .build();
 
-            userRepository.save(userDto.toEntity());
+            mongoTemplate.save(userDto);
             return true;
 //        }
 //        return false;
