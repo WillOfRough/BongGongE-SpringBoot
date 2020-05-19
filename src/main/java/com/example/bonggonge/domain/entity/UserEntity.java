@@ -10,15 +10,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Setter
 public class UserEntity {
     @Id
-    private Long no;
     private String username;
     private String nickname;
     private String email;
     private String password;
 
     @Builder
-    public UserEntity(Long no, String username, String nickname, String email, String password,String gender) {
-        this.no = no;
+    public UserEntity(String username, String nickname, String email, String password,String gender) {
         this.username=username;
         this.nickname=nickname;
         this.email = email;

@@ -53,6 +53,13 @@ public class EmailService {
 //        List<EmailEntity> emailEntityWrapper = emailRepository.findByEmail(email);
 //        if(emailEntityWrapper.size()>0){
 //            if(Integer.toString(emailEntityWrapper.get(0).getCheckNum()).equals(math)){
+//
+//            Query query = new Query();
+//            Update update = new Update();
+//            update.set("userName", reply.getUserName());
+//            update.set("contents", reply.getContents());
+//
+//            WriteResult writeResult = mongoTemplete.updateFirst(query, update, ReplyDomain.class);
 //                emailRepository.updateByEmail(email);
 //                return true;
 //            }
@@ -62,30 +69,27 @@ public class EmailService {
 //        }else{
 //            return false;
 //        }
+
+    }
+
 //
+//    public List<EmailEntity> insert(EmailEntity emailEntity) {
+//        mongoTemplete.insert(emailEntity);
+//        return emailRepository.findByEmail(bno);
 //    }
-
-
-    @Override
-    public List<ReplyDomain> insert(ReplyDomain reply) {
-        mongoTemplete.insert(reply);
-        return emailRepository.findByEmail(bno);
-    }
-
-    @Override
-    public List<ReplyDomain> update(ReplyDomain reply) {
-        int bno = reply.getBno();
-
-        ObjectId id = new ObjectId(reply.getId());
-        Query query = new Query();
-        query.addCriteria(Criteria.where("_id").is(id));
-
-        Update update = new Update();
-        update.set("userName", reply.getUserName());
-        update.set("contents", reply.getContents());
-
-        WriteResult writeResult = mongoTemplete.updateFirst(query, update, ReplyDomain.class);
-
-        return replyRepo.findByBno(bno);
-    }
-}
+//
+//    public List<EmailEntity> update(EmailEntity emailEntity) {
+//        int bno = reply.getBno();
+//
+//        ObjectId id = new ObjectId(reply.getId());
+//        Query query = new Query();
+//        query.addCriteria(Criteria.where("_id").is(id));
+//
+//        Update update = new Update();
+//        update.set("userName", reply.getUserName());
+//        update.set("contents", reply.getContents());
+//
+//        WriteResult writeResult = mongoTemplete.updateFirst(query, update, ReplyDomain.class);
+//
+//        return replyRepo.findByBno(bno);
+//    }

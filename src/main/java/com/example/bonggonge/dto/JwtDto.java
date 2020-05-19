@@ -14,7 +14,6 @@ import java.util.Collection;
 @NoArgsConstructor
 @Data
 public class JwtDto implements UserDetails {
-    private Long no;
     private String username;
     private String email;
     private String nickname;
@@ -35,8 +34,7 @@ public class JwtDto implements UserDetails {
     }
 
     @Builder
-    public JwtDto(Long no, String username, String nickname, String email, String password) {
-        this.no=no;
+    public JwtDto(String username, String nickname, String email, String password) {
         this.username=username;
         this.nickname=nickname;
         this.email = email;

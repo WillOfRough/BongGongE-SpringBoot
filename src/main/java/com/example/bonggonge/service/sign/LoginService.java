@@ -37,21 +37,21 @@ public class LoginService implements UserDetailsService {
 //        if(emailEntityList.isEmpty()){
 //            return false;
 //        }
-//        Optional<UserEntity> userEntityWrapper = userRepository.findByUsername(username);
-//        if(emailEntityList.get(0).isCertified()&&!userEntityWrapper.isPresent()){
+        Optional<UserEntity> userEntityWrapper = userRepository.findByUsername(username);
+        if(!userEntityWrapper.isPresent()){
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();     // 비밀번호 암호화
 
-            UserJwtDto userDto = UserJwtDto.builder()
+            UserEntity userEntity = UserEntity.builder()
                     .username(username)
                     .password(passwordEncoder.encode(password))
                     .nickname(nickName)
                     .email(email)
                     .build();
 
-            mongoTemplate.save(userDto);
+            mongoTemplate.save(userEntity);
             return true;
-//        }
-//        return false;
+        }
+        return false;
     }
 
     @Transactional
@@ -62,11 +62,9 @@ public class LoginService implements UserDetailsService {
         UserEntity userEntity = userRepository.findByUsername(username)                                    //해당 아이디값 추출
                 .orElse(UserEntity.builder().build());
         if(userEntity != null) {                                                                            //해당 아이디가 있는지
-
-            System.out.println(userEntity.getNo());
             if (passwordEncoder.matches(password, userEntity.getPassword())) {                              //비밀번호 같은지 확인
                 Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-                result = jwtTokenUtil.generateToken(new UserJwtDto(userEntity.getNo(),userEntity.getUsername(), "nickname1", userEntity.getEmail(), userEntity.getPassword()));
+                result = jwtTokenUtil.generateToken(new UserJwtDto(1L,userEntity.getUsername(), userEntity.getNickname(), userEntity.getEmail(), userEntity.getPassword()));
             }
         }
         return result;
