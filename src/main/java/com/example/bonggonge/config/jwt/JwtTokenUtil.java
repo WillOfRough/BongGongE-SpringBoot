@@ -1,6 +1,6 @@
 package com.example.bonggonge.config.jwt;
 
-import com.example.bonggonge.dto.UserJwtDto;
+import com.example.bonggonge.dto.JwtDto;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -22,6 +22,7 @@ public class JwtTokenUtil implements Serializable {
                 .parseClaimsJws(token);
         return (String) claims.getBody().get("username");
     }
+
     public String getEmailFromToken(String token) {
         Jws<Claims> claims = Jwts.parser()
                 .setSigningKey(secret)
@@ -61,11 +62,11 @@ public class JwtTokenUtil implements Serializable {
 
 
     //generate token for user
-    public String generateToken(UserJwtDto userJwtDto) {
+    public String generateToken(JwtDto jwtDto) {
         return Jwts.builder()
-                .claim("userNo",userJwtDto.getNo())
-                .claim("email",userJwtDto.getEmail())
-                .claim("username",userJwtDto.getUsername())
+                .claim("userNo",jwtDto.getNo())
+                .claim("email",jwtDto.getEmail())
+                .claim("username",jwtDto.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
                 .signWith(SignatureAlgorithm.HS512, secret).compact();

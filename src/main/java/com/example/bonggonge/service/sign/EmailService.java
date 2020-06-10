@@ -1,35 +1,23 @@
 package com.example.bonggonge.service.sign;
 
-
 import com.example.bonggonge.domain.entity.EmailEntity;
 import com.example.bonggonge.domain.repository.EmailRepository;
 import com.example.bonggonge.dto.EmailDto;
-import com.mongodb.WriteResult;
-import lombok.AllArgsConstructor;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.management.Query;
 import java.util.List;
-//수정
+
 @Service
-@AllArgsConstructor
 public class EmailService {
-
-
-    private final MongoTemplate mongoTemplete;
-
-    private final EmailRepository emailRepository;
-
-    public final JavaMailSender javaMailSender;
+    @Autowired
+    private EmailRepository emailRepository;
+    @Autowired
+    public JavaMailSender javaMailSender;
 
     @Async
     public boolean sendEmail(String email) {
@@ -48,48 +36,20 @@ public class EmailService {
         emailRepository.save(email_dto.toEntity());
         return true;
     }
-//    @Transactional
-//    public boolean authEmail(String email,String math){
-//        List<EmailEntity> emailEntityWrapper = emailRepository.findByEmail(email);
-//        if(emailEntityWrapper.size()>0){
-//            if(Integer.toString(emailEntityWrapper.get(0).getCheckNum()).equals(math)){
-//
-//            Query query = new Query();
-//            Update update = new Update();
-//            update.set("userName", reply.getUserName());
-//            update.set("contents", reply.getContents());
-//
-//            WriteResult writeResult = mongoTemplete.updateFirst(query, update, ReplyDomain.class);
-//                emailRepository.updateByEmail(email);
-//                return true;
-//            }
-//            else {
-//                return false;
-//            }
-//        }else{
-//            return false;
-//        }
+    @Transactional
+    public boolean authEmail(String email,String math){
+        List<EmailEntity> emailEntityWrapper = emailRepository.findByEmail(email);
+        if(emailEntityWrapper.size()>0){
+            if(Integer.toString(emailEntityWrapper.get(0).getCheckNum()).equals(math)){
+                emailRepository.updateByEmail(email);
+                return true;
+            }
+            else {
+                return false;
+            }
+        }else{
+            return false;
+        }
 
     }
-
-//
-//    public List<EmailEntity> insert(EmailEntity emailEntity) {
-//        mongoTemplete.insert(emailEntity);
-//        return emailRepository.findByEmail(bno);
-//    }
-//
-//    public List<EmailEntity> update(EmailEntity emailEntity) {
-//        int bno = reply.getBno();
-//
-//        ObjectId id = new ObjectId(reply.getId());
-//        Query query = new Query();
-//        query.addCriteria(Criteria.where("_id").is(id));
-//
-//        Update update = new Update();
-//        update.set("userName", reply.getUserName());
-//        update.set("contents", reply.getContents());
-//
-//        WriteResult writeResult = mongoTemplete.updateFirst(query, update, ReplyDomain.class);
-//
-//        return replyRepo.findByBno(bno);
-//    }
+}

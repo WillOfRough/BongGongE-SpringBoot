@@ -1,19 +1,30 @@
 package com.example.bonggonge.domain.entity;
 
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
-@Document(collection = "Email")
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@Setter
+@Entity
+@Table(name = "email")
 public class EmailEntity {
 
     @Id
+    @Column(length = 30, nullable = false)
     private String email;
+
+    @Column(name = "check_num")
     private int checkNum;
+
+    @ColumnDefault("false") //default 0
     private boolean certified;
 
     @Builder

@@ -1,6 +1,5 @@
 package com.example.bonggonge.dto;
 
-
 import com.example.bonggonge.domain.entity.UserEntity;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,13 +11,13 @@ import java.util.Collection;
 @Setter
 @ToString
 @NoArgsConstructor
-@Data
-public class UserJwtDto implements UserDetails {
+public class UserDto implements UserDetails {
     private Long no;
     private String username;
     private String email;
     private String nickname;
     private String password;
+    private String gender;
     private boolean isEnabled;
     private boolean isAccountNonExpired;
     private boolean isAccountNonLocked;
@@ -27,15 +26,17 @@ public class UserJwtDto implements UserDetails {
 
     public UserEntity toEntity(){
         return UserEntity.builder()
+                .no(no)
                 .username(username)
                 .email(email)
+                .nickname(nickname)
                 .password(password)
                 .build();
     }
 
     @Builder
-    public UserJwtDto(Long no, String username, String nickname, String email, String password) {
-        this.no=no;
+    public UserDto(Long no, String username, String nickname, String email, String password) {
+        this.no = no;
         this.username=username;
         this.nickname=nickname;
         this.email = email;
