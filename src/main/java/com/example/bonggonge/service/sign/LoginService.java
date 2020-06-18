@@ -31,7 +31,7 @@ public class LoginService implements UserDetailsService {
     private JwtTokenUtil jwtTokenUtil;
 
     @Transactional
-    public boolean joinUser(String username,String password,String email,String nickName) {
+    public boolean joinUser(String username,String password,String email) {
 //        List<EmailEntity> emailEntityList = emailRepository.findByEmail(email);
 //        if(emailEntityList.isEmpty()){
 //            return false;
@@ -44,7 +44,6 @@ public class LoginService implements UserDetailsService {
             UserDto userDto = UserDto.builder()
                     .username(username)
                     .password(passwordEncoder.encode(password))
-                    .nickname(nickName)
                     .email(email)
                     .build();
 

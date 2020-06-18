@@ -19,9 +19,6 @@ public class UserEntity {
     @Column(length = 20, nullable = false)
     private String username;
 
-    @Column(length = 20)
-    private String nickname;
-
     @Column(length = 30, nullable = false)
     private String email;
 
@@ -29,10 +26,9 @@ public class UserEntity {
     private String password;
 
     @Builder
-    public UserEntity(Long no, String username, String nickname, String email, String password) {
+    public UserEntity(Long no, String username, String email, String password) {
         this.no = no;
         this.username=username;
-        this.nickname=nickname;
         this.email = email;
         this.password = password;
     }

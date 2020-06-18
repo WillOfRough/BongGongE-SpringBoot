@@ -23,14 +23,14 @@ public class FactoryEntity {
     private String factoryName;
 
     @Column(name = "factory_lat",nullable = false)
-    private int factoryLat;
+    private double factoryLat;
 
     @Column(name = "factory_lng",nullable = false)
-    private int factoryLng;
+    private double factoryLng;
 
 
     @Builder
-    public FactoryEntity(Long no, Long userNo, String factoryName, int factoryLat, int factoryLng) {
+    public FactoryEntity(Long no, Long userNo, String factoryName, double factoryLat, double factoryLng) {
         this.no = no;
         this.userNo=userNo;
         this.factoryName=factoryName;

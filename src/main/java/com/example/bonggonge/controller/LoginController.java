@@ -28,7 +28,7 @@ public class LoginController {
         if(params.containsKey("username") && params.containsKey("password")
                 && params.containsKey("email") && params.containsKey("nickname")){
             try{
-                result.put("result",loginService.joinUser(params.get("username"),params.get("password"),params.get("email"),params.get("nickname")));
+                result.put("result",loginService.joinUser(params.get("username"),params.get("password"),params.get("email")));
             } catch (Exception e){
                 result.put("error",responseError.makeResponseError("server-001"));
                 result.put("result",false);

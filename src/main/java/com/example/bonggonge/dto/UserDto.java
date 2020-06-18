@@ -15,7 +15,6 @@ public class UserDto implements UserDetails {
     private Long no;
     private String username;
     private String email;
-    private String nickname;
     private String password;
     private String gender;
     private boolean isEnabled;
@@ -29,16 +28,14 @@ public class UserDto implements UserDetails {
                 .no(no)
                 .username(username)
                 .email(email)
-                .nickname(nickname)
                 .password(password)
                 .build();
     }
 
     @Builder
-    public UserDto(Long no, String username, String nickname, String email, String password) {
+    public UserDto(Long no, String username, String email, String password) {
         this.no = no;
         this.username=username;
-        this.nickname=nickname;
         this.email = email;
         this.password = password;
     }

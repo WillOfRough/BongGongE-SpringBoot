@@ -34,7 +34,7 @@ public class FactoryController {
                     && params.containsKey("factoryLng")) {
                 try {
                     result.put("result", factoryService.EditFactory(userNo,params.get("factoryName"),
-                            Integer.parseInt(params.get("factoryLat")), Integer.parseInt(params.get("factoryLng"))));
+                            Double.parseDouble(params.get("factoryLat")), Double.parseDouble(params.get("factoryLng"))));
                 } catch (Exception e) {
                     result.put("error", responseError.makeResponseError("server-001"));
                     result.put("result", false);

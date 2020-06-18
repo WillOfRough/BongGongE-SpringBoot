@@ -10,8 +10,8 @@ import lombok.*;
 public class FactoryDto {
     private Long userNo;
     private String factoryName;
-    private int factoryLat;
-    private int factoryLng;
+    private double factoryLat;
+    private double factoryLng;
 
 
     public FactoryEntity toEntity(){
@@ -24,7 +24,7 @@ public class FactoryDto {
     }
 
     @Builder
-    public FactoryDto(Long userNo, String factoryName, int factoryLat, int factoryLng) {
+    public FactoryDto(Long userNo, String factoryName, double factoryLat, double factoryLng) {
         this.userNo=userNo;
         this.factoryName=factoryName;
         this.factoryLat = factoryLat;

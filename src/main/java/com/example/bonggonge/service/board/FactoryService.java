@@ -13,7 +13,7 @@ public class FactoryService {
 
     private final FactoryRepository factoryRepository;
     @Transactional
-    public boolean EditFactory(Long userNo,String factoryName,int factoryLng,int factoryLat) {
+    public boolean EditFactory(Long userNo,String factoryName,double factoryLng,double factoryLat) {
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();     // 비밀번호 암호화
 
             FactoryDto factoryDto = FactoryDto.builder()
