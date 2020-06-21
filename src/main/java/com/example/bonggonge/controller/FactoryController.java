@@ -25,16 +25,53 @@ public class FactoryController {
     private final JwtTokenUtil jwtTokenUtil;
 
     @PostMapping("/factory/edit")
-    public Map<String, Object> signUp(HttpServletRequest request, @RequestBody Map<String, String> params) {
+    public Map<String, Object> factoryEdit(HttpServletRequest request, @RequestBody Map<String, String> params) {
         Map<String, Object> result = new HashMap<>();
         Map<String, String> tokenError = jwtTokenError.jwtErrorCheck(request);
         if (tokenError == null) {
             Long userNo = jwtTokenUtil.getUsernoFromToken(request.getHeader("token"));
-            if (params.containsKey("factoryName") && params.containsKey("factoryLat")
-                    && params.containsKey("factoryLng")) {
+            if (params.containsKey("factoryName") && params.containsKey("latitude")
+                    && params.containsKey("longitude")) {
                 try {
-                    result.put("result", factoryService.EditFactory(userNo,params.get("factoryName"),
-                            Double.parseDouble(params.get("factoryLat")), Double.parseDouble(params.get("factoryLng"))));
+                    result.put("result", factoryService.EditFactory(
+                            userNo,
+                            params.get("factoryName"),
+                            params.get("detail"),
+                            params.get("address"),
+                            Double.parseDouble(params.get("latitude")),
+                            Double.parseDouble(params.get("longitude")),
+                            params.get("phone"),
+                            params.get("UIimage")));
+                } catch (Exception e) {
+                    result.put("error", responseError.makeResponseError("server-001"));
+                    result.put("result", false);
+                }
+            } else {
+                result.put("error", responseError.makeResponseError("param-003"));
+                result.put("result", false);
+            }
+        }
+        else{
+            result.put("result",false);
+            result.put("error",tokenError);
+        }
+        return result;
+    }
+
+
+    @PostMapping("/factory/list")
+    public Map<String, Object> factoryList(HttpServletRequest request, @RequestBody Map<String, String> params) {
+        Map<String, Object> result = new HashMap<>();
+        Map<String, String> tokenError = jwtTokenError.jwtErrorCheck(request);
+        if (tokenError == null) {
+            Long userNo = jwtTokenUtil.getUsernoFromToken(request.getHeader("token"));
+            if (params.containsKey("distance") && params.containsKey("longitude")
+                    && params.containsKey("latitude")) {
+                try {
+                    result.put("result", factoryService.ListFactory(
+                            Double.parseDouble(params.get("distance")),
+                            Double.parseDouble(params.get("latitude")),
+                            Double.parseDouble(params.get("longitude"))));
                 } catch (Exception e) {
                     result.put("error", responseError.makeResponseError("server-001"));
                     result.put("result", false);
