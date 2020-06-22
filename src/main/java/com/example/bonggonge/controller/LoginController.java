@@ -26,7 +26,7 @@ public class LoginController {
     public Map<String,Object> signUp (@RequestBody Map<String, String> params) {
         Map<String,Object> result = new HashMap<>();
         if(params.containsKey("username") && params.containsKey("password")
-                && params.containsKey("email") && params.containsKey("nickname")){
+                && params.containsKey("email")){
             try{
                 result.put("result",loginService.joinUser(params.get("username"),params.get("password"),params.get("email")));
             } catch (Exception e){

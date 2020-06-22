@@ -70,7 +70,7 @@ public class LoginService implements UserDetailsService {
                 } else {
                     grantedAuthorities.add(new SimpleGrantedAuthority(Role.MEMBER.getValue()));
                 }
-                result = jwtTokenUtil.generateToken(new JwtDto(userEntity.getNo(),userEntity.getUsername(), "nickname1", userEntity.getEmail(), userEntity.getPassword()));
+                result = jwtTokenUtil.generateToken(new JwtDto(userEntity.getNo(),userEntity.getUsername(), userEntity.getEmail(), userEntity.getPassword()));
             }
         }
         return result;

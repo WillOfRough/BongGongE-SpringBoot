@@ -17,7 +17,6 @@ public class JwtDto implements UserDetails {
     private Long no;
     private String username;
     private String email;
-    private String nickname;
     private String password;
     private boolean isEnabled;
     private boolean isAccountNonExpired;
@@ -29,16 +28,14 @@ public class JwtDto implements UserDetails {
         return UserEntity.builder()
                 .username(username)
                 .email(email)
-                .nickname(nickname)
                 .password(password)
                 .build();
     }
 
     @Builder
-    public JwtDto(Long no,String username, String nickname, String email, String password) {
+    public JwtDto(Long no,String username, String email, String password) {
         this.no=no;
         this.username=username;
-        this.nickname=nickname;
         this.email = email;
         this.password = password;
     }
